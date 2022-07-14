@@ -275,7 +275,7 @@ async def on_message(message):
                         word not in message.content.lower() for word in white):
                     await message.delete()
     if message.guild.id == 995429222497652796 and not message.author.bot:
-        if message.channel.id == 996666624058867774:
+        if message.channel.id == 996008035757588571:
             left_over = []
             successful = []
             username_list = message.content.split("\n")
@@ -302,6 +302,9 @@ async def on_message(message):
                 await message.channel.send(wled)
             if len(nwled) > 14:
                 await message.channel.send(nwled)
+    if message.guild.id == 989976603243188224 and message.channel.id == 991891371109658714:
+        if not message.attachments:
+            await message.delete()
     await client.process_commands(message)
 
 
