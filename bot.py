@@ -275,7 +275,7 @@ async def on_message(message):
                         word not in message.content.lower() for word in white):
                     await message.delete()
     if message.guild.id == 995429222497652796 and not message.author.bot:
-        if message.channel.id == 996008035757588571:
+        if message.channel.id == 996666624058867774:
             left_over = []
             successful = []
             username_list = message.content.split("\n")
