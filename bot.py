@@ -329,8 +329,8 @@ async def on_message(message):
                 await message.channel.send(wled)
             if len(nwled) > 14:
                 await message.channel.send(nwled)
-            await ctx.send(f"Successfully done for {len(successful)} users")
-            await ctx.send(f"Couldn't find {len(left_over)} users")
+            await message.channel.send(f"Successfully done for {len(successful)} users")
+            await message.channel.send(f"Couldn't find {len(left_over)} users")
     if message.guild.id == 989976603243188224 and message.channel.id == 991891371109658714:
         if not message.attachments:
             await message.delete()
