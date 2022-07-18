@@ -3,6 +3,7 @@ import discord
 import datetime
 from discord.ext import commands
 import sys
+import requests
 
 intents = discord.Intents.default()
 intents.members = True
@@ -38,7 +39,7 @@ async def gib(ctx, role: discord.Role):
 
             open('temp.txt', 'wb').write(r.content)
             username_list = open('temp.txt', encoding='utf-8').read().splitlines()
-            print(username_list)
+            os.remove("temp.txt")
         else:
             msg = message.content
             username_list = msg.split('\n')
@@ -71,7 +72,7 @@ async def gib(ctx, role: discord.Role):
 
 @client.command()
 @commands.has_permissions(manage_roles=True)
-async def gib(ctx, role: discord.Role):
+async def ungib(ctx, role: discord.Role):
     left_over = []
     successful = []
     await ctx.send("Reply with discord usernames (follow the format)")
@@ -89,7 +90,7 @@ async def gib(ctx, role: discord.Role):
 
             open('temp.txt', 'wb').write(r.content)
             username_list = open('temp.txt', encoding='utf-8').read().splitlines()
-            print(username_list)
+            os.remove("temp.txt")
         else:
             msg = message.content
             username_list = msg.split('\n')
