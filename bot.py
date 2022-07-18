@@ -255,7 +255,7 @@ async def list(ctx):
 @client.event
 async def on_message(message):
     if message.guild.id == 989976603243188224:
-        princes = 990559906065182781
+        princes = 990241246222094366
         prince = message.guild.get_role(princes)
         user = message.author
         if user == None:
