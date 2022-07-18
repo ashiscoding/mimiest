@@ -281,9 +281,11 @@ async def list(ctx):
 
 @client.event
 async def on_message(message):
-    if message.guild.id == 989976603243188224:
-        princes = 990241246222094366
+    if message.guild.id == 995429222497652796:
+        princes = 995637756673933332
+        maleks = 995636894895460403
         prince = message.guild.get_role(princes)
+        malek = message.guild.get_role(maleks)
         user = message.author
         if user == None:
             print("no")
@@ -294,7 +296,7 @@ async def on_message(message):
                 if text == "txt":
                     await message.delete()
                     return
-            if not prince in user.roles:
+            if not prince in user.roles and not malek in user.roles:
                 links = [".com", ".net", ".org", ".co", ".us", ".ml", ".tk", ".ga", ".cf", ".gq", "https",
                          "PHASE 2 MINTING LIVE NOW", "http", "👉 http", "mint.io", "arabpunk", "arab punk"]
                 white = ["tenor"]
@@ -335,6 +337,7 @@ async def on_message(message):
         if not message.attachments:
             await message.delete()
     await client.process_commands(message)
+
 
 
 @client.event
