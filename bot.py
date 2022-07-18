@@ -29,36 +29,49 @@ async def gib(ctx, role: discord.Role):
         return m.author.id == ctx.author.id
 
     message = await client.wait_for('message', check=check, timeout=120)
-    await ctx.send("on it :cat:")
+    if not message.author.bot:
+        await ctx.send("on it :cat:")
+        if message.attachments:
+            attachment = message.attachments[0]
+            url = attachment.url
+            r = requests.get(url, allow_redirects=True)
 
-    msg = message.content
-    username_list = msg.split('\n')
-    for username in username_list:
-        username = username.rstrip()
-        try:
-            namez, id = username.split('#')
-        except:
-            left_over.append(username)
-
-        user = discord.utils.get(ctx.guild.members, name=namez, discriminator=id)
-        if user == None:
-            left_over.append(username)
+            open('temp.txt', 'wb').write(r.content)
+            username_list = open('temp.txt', encoding='utf-8').read().splitlines()
+            print(username_list)
         else:
-            await user.add_roles(role)
-            successful.append(username)
-    wled = "**Successful**"
-    for i in successful:
-        wled = wled + "\n" + i
-    nwled = "**Not Found**"
-    for i in left_over:
-        nwled = nwled + "\n" + i
+            msg = message.content
+            username_list = msg.split('\n')
+        for username in username_list:
+            username = username.rstrip()
+            try:
+                namez, id = username.split('#')
+                user = discord.utils.get(ctx.guild.members, name=namez, discriminator=id)
+            except:
+                user = None
 
-    await ctx.send(wled)
-    await ctx.send(nwled)
+            if user == None:
+                left_over.append(username)
+            else:
+                await user.add_roles(role)
+                successful.append(username)
+        wled = "**Successful**"
+        for i in successful:
+            wled = wled + "\n" + i
+        nwled = "**Not Found**"
+        for i in left_over:
+            nwled = nwled + "\n" + i
+
+        if len(wled) > 15:
+            await message.channel.send(wled)
+        if len(nwled) > 14:
+            await message.channel.send(nwled)
+        await ctx.send(f"Successfully done for {len(successful)} users")
+        await ctx.send(f"Couldn't find {len(left_over)} users")
 
 @client.command()
 @commands.has_permissions(manage_roles=True)
-async def ungib(ctx, role: discord.Role):
+async def gib(ctx, role: discord.Role):
     left_over = []
     successful = []
     await ctx.send("Reply with discord usernames (follow the format)")
@@ -67,32 +80,45 @@ async def ungib(ctx, role: discord.Role):
         return m.author.id == ctx.author.id
 
     message = await client.wait_for('message', check=check, timeout=120)
-    await ctx.send("on it :cat:")
+    if not message.author.bot:
+        await ctx.send("on it :cat:")
+        if message.attachments:
+            attachment = message.attachments[0]
+            url = attachment.url
+            r = requests.get(url, allow_redirects=True)
 
-    msg = message.content
-    username_list = msg.split('\n')
-    for username in username_list:
-        username = username.rstrip()
-        try:
-            namez, id = username.split('#')
-        except:
-            left_over.append(username)
-
-        user = discord.utils.get(ctx.guild.members, name=namez, discriminator=id)
-        if user == None:
-            left_over.append(username)
+            open('temp.txt', 'wb').write(r.content)
+            username_list = open('temp.txt', encoding='utf-8').read().splitlines()
+            print(username_list)
         else:
-            await user.remove_roles(role)
-            successful.append(username)
-    wled = "**Successful**"
-    for i in successful:
-        wled = wled + "\n" + i
-    nwled = "**Not Found**"
-    for i in left_over:
-        nwled = nwled + "\n" + i
+            msg = message.content
+            username_list = msg.split('\n')
+        for username in username_list:
+            username = username.rstrip()
+            try:
+                namez, id = username.split('#')
+                user = discord.utils.get(ctx.guild.members, name=namez, discriminator=id)
+            except:
+                user = None
 
-    await ctx.send(wled)
-    await ctx.send(nwled)
+            if user == None:
+                left_over.append(username)
+            else:
+                await user.remove_roles(role)
+                successful.append(username)
+        wled = "**Successful**"
+        for i in successful:
+            wled = wled + "\n" + i
+        nwled = "**Not Found**"
+        for i in left_over:
+            nwled = nwled + "\n" + i
+
+        if len(wled) > 15:
+            await message.channel.send(wled)
+        if len(nwled) > 14:
+            await message.channel.send(nwled)
+        await ctx.send(f"Successfully done for {len(successful)} users")
+        await ctx.send(f"Couldn't find {len(left_over)} users")
 
 
 @client.event
