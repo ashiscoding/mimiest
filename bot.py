@@ -63,9 +63,9 @@ async def gib(ctx, role: discord.Role):
         for i in left_over:
             nwled = nwled + "\n" + i
 
-        if len(wled) > 15:
+        if len(wled) > 15 and len(wled) < 1900:
             await message.channel.send(wled)
-        if len(nwled) > 14:
+        if len(nwled) > 14 and len(nwled) < 1900:
             await message.channel.send(nwled)
         await ctx.send(f"Successfully done for {len(successful)} users")
         await ctx.send(f"Couldn't find {len(left_over)} users")
@@ -114,9 +114,9 @@ async def ungib(ctx, role: discord.Role):
         for i in left_over:
             nwled = nwled + "\n" + i
 
-        if len(wled) > 15:
+        if len(wled) > 15 and len(wled) < 1900:
             await message.channel.send(wled)
-        if len(nwled) > 14:
+        if len(nwled) > 14 and len(nwled) < 1900:
             await message.channel.send(nwled)
         await ctx.send(f"Successfully done for {len(successful)} users")
         await ctx.send(f"Couldn't find {len(left_over)} users")
