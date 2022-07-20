@@ -237,6 +237,7 @@ async def assign(ctx, role: discord.Role):
             user = ctx.guild.get_member(int(temp))
             if user == None:
                 left_over.append(str(user))
+                continue
             else:
                 await user.add_roles(role)
                 successful.append(str(user))
@@ -265,6 +266,7 @@ async def list(ctx):
             user = ctx.guild.get_member(int(temp))
             if user == None:
                 left_over.append(str(user))
+                continue
             else:
                 author_list.append((user.name + '#' + str(user.discriminator)))
                 successful.append(str(user.id))
