@@ -370,6 +370,21 @@ async def on_message_delete(message):
         embed.timestamp = datetime.datetime.utcnow()
         embed.set_footer(text='\u200b')
         await channel.send(embed=embed)
+ 
+
+@client.event
+async def on_member_join(member):
+    if member.guild.id == 995429222497652796:
+        print(member.name)
+        mods = ["emirrZ", "alhubu", "King Khalid", "Hakim CZ", "Khalifa Billionaire", "Brother Bill", "Aziz Trump",
+                "Malek Salman",
+                "princeomarr", "SteFan", "mochi chan", "𝗡𝗮𝗻𝗰𝘆 𝗮𝗷𝗿𝗮𝗺", "WeirdclownisSAD", "Nipherme",
+                "Yakub A.B", "Greedisgood", "David Eth Lord",
+                "haifa wehb", "Muhammad Bin Hakim", "Subarash", "amoudi", "Blessed EDDIE", "Rachel19", "Cheeze",
+                "King Nasr", "King Khalid",
+                "Malek Salman"]
+        if any(word.lower() in member.name.lower() for word in mods):
+            await member.ban(reason="Impersonating mods")
 
 @client.command()
 async def clear(ctx,amount=1):
