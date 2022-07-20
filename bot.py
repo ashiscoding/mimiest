@@ -280,7 +280,6 @@ async def list(ctx):
     await ctx.author.send(msg)
     await ctx.send(f"Check DM")
 
-
 @client.event
 async def on_message(message):
     if message.guild.id == 995429222497652796:
@@ -313,16 +312,24 @@ async def on_message(message):
             role = message.guild.get_role(995639674104189010)
             for username in username_list:
                 username = username.rstrip()
-                try:
-                    namez, id = username.split('#')
-                except:
-                    continue
-                user = discord.utils.get(message.guild.members, name=namez, discriminator=id)
+                if username.startswith('<@'):
+                    user_id = ""
+                    for c in username:
+                        if c.isdigit():
+                            user_id = user_id + c
+                    user = message.guild.get_member(int(user_id))
+                else:
+                    try:
+                        namez, id = username.split('#')
+                    except:
+                        continue
+                    user = discord.utils.get(message.guild.members, name=namez, discriminator=id)
+
                 if user == None:
                     left_over.append(username)
                 else:
                     await user.add_roles(role)
-                    successful.append(username)
+                    successful.append(user.name + '#' + str(user.discriminator))
             wled = "**Successful**"
             for i in successful:
                 wled = wled + "\n" + i
@@ -335,9 +342,45 @@ async def on_message(message):
                 await message.channel.send(nwled)
             await message.channel.send(f"Successfully done for {len(successful)} users")
             await message.channel.send(f"Couldn't find {len(left_over)} users")
-    if message.guild.id == 989976603243188224 and message.channel.id == 991891371109658714:
-        if not message.attachments:
-            await message.delete()
+
+    if message.guild.id == 995429222497652796 and not message.author.bot:
+        if message.channel.id == 999275777688346735:
+            left_over = []
+            successful = []
+            username_list = message.content.split("\n")
+            role = message.guild.get_role(999272311511339049)
+            for username in username_list:
+                username = username.rstrip()
+                if username.startswith('<@'):
+                    user_id = ""
+                    for c in username:
+                        if c.isdigit():
+                            user_id = user_id + c
+                    user = message.guild.get_member(int(user_id))
+                else:
+                    try:
+                        namez, id = username.split('#')
+                    except:
+                        continue
+                    user = discord.utils.get(message.guild.members, name=namez, discriminator=id)
+
+                if user == None:
+                    left_over.append(username)
+                else:
+                    await user.add_roles(role)
+                    successful.append(user.name + '#' + str(user.discriminator))
+            wled = "**Successful**"
+            for i in successful:
+                wled = wled + "\n" + i
+            nwled = "**Not Found**"
+            for i in left_over:
+                nwled = nwled + "\n" + i
+            if len(wled) > 15:
+                await message.channel.send(wled)
+            if len(nwled) > 14:
+                await message.channel.send(nwled)
+            await message.channel.send(f"Successfully done for {len(successful)} users")
+            await message.channel.send(f"Couldn't find {len(left_over)} users")
     await client.process_commands(message)
 
 
