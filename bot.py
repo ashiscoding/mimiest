@@ -375,7 +375,6 @@ async def on_message_delete(message):
 @client.event
 async def on_member_join(member):
     if member.guild.id == 995429222497652796:
-        print(member.name)
         mods = ["emirrZ", "alhubu", "King Khalid", "Hakim CZ", "Khalifa Billionaire", "Brother Bill", "Aziz Trump",
                 "Malek Salman",
                 "princeomarr", "SteFan", "mochi chan", "𝗡𝗮𝗻𝗰𝘆 𝗮𝗷𝗿𝗮𝗺", "WeirdclownisSAD", "Nipherme",
