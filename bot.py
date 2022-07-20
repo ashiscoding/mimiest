@@ -20,7 +20,7 @@ whitelisted_kitten = 901054830540386354
 
 
 @client.command()
-# @commands.has_permissions(manage_roles=True)
+@commands.has_permissions(manage_roles=True)
 async def gib(ctx, role: discord.Role):
     left_over = []
     successful = []
