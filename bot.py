@@ -71,7 +71,7 @@ async def gib(ctx, role: discord.Role):
         await ctx.send(f"Couldn't find {len(left_over)} users")
 
 @client.command()
-# @commands.has_permissions(manage_roles=True)
+@commands.has_permissions(manage_roles=True)
 async def ungib(ctx, role: discord.Role):
     left_over = []
     successful = []
