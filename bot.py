@@ -20,107 +20,106 @@ whitelisted_kitten = 901054830540386354
 
 
 @client.command()
-@commands.has_permissions(manage_roles=True)
 async def gib(ctx, role: discord.Role):
-    left_over = []
-    successful = []
-    await ctx.send("Reply with discord usernames (follow the format)")
+    if ctx.author.guild_permissions.manage_roles or ctx.author.id == 480361233049059338 or ctx.author.id == 776716251997274112:
+        left_over = []
+        successful = []
+        await ctx.send("Reply with discord usernames (follow the format)")
 
-    def check(m):
-        return m.author.id == ctx.author.id
+        def check(m):
+            return m.author.id == ctx.author.id
 
-    message = await client.wait_for('message', check=check, timeout=120)
-    if not message.author.bot:
-        await ctx.send("on it :cat:")
-        if message.attachments:
-            attachment = message.attachments[0]
-            url = attachment.url
-            r = requests.get(url, allow_redirects=True)
+        message = await client.wait_for('message', check=check, timeout=120)
+        if not message.author.bot:
+            await ctx.send("on it :cat:")
+            if message.attachments:
+                attachment = message.attachments[0]
+                url = attachment.url
+                r = requests.get(url, allow_redirects=True)
 
-            open('temp.txt', 'wb').write(r.content)
-            username_list = open('temp.txt', encoding='utf-8').read().splitlines()
-            os.remove("temp.txt")
-        else:
-            msg = message.content
-            username_list = msg.split('\n')
-        for username in username_list:
-            username = username.rstrip()
-            try:
-                namez, id = username.split('#')
-                user = discord.utils.get(ctx.guild.members, name=namez, discriminator=id)
-            except:
-                user = None
-
-            if user == None:
-                left_over.append(username)
+                open('temp.txt', 'wb').write(r.content)
+                username_list = open('temp.txt', encoding='utf-8').read().splitlines()
+                os.remove("temp.txt")
             else:
-                await user.add_roles(role)
-                successful.append(username)
-        wled = "**Successful**"
-        for i in successful:
-            wled = wled + "\n" + i
-        nwled = "**Not Found**"
-        for i in left_over:
-            nwled = nwled + "\n" + i
+                msg = message.content
+                username_list = msg.split('\n')
+            for username in username_list:
+                username = username.rstrip()
+                try:
+                    namez, id = username.split('#')
+                    user = discord.utils.get(ctx.guild.members, name=namez, discriminator=id)
+                except:
+                    user = None
 
-        if len(wled) > 15 and len(wled) < 1900:
-            await message.channel.send(wled)
-        if len(nwled) > 14 and len(nwled) < 1900:
-            await message.channel.send(nwled)
-        await ctx.send(f"Successfully done for {len(successful)} users")
-        await ctx.send(f"Couldn't find {len(left_over)} users")
+                if user == None:
+                    left_over.append(username)
+                else:
+                    await user.add_roles(role)
+                    successful.append(username)
+            wled = "**Successful**"
+            for i in successful:
+                wled = wled + "\n" + i
+            nwled = "**Not Found**"
+            for i in left_over:
+                nwled = nwled + "\n" + i
+
+            if len(wled) > 15 and len(wled) < 1900:
+                await message.channel.send(wled)
+            if len(nwled) > 14 and len(nwled) < 1900:
+                await message.channel.send(nwled)
+            await ctx.send(f"Successfully done for {len(successful)} users")
+            await ctx.send(f"Couldn't find {len(left_over)} users")
 
 @client.command()
-@commands.has_permissions(manage_roles=True)
 async def ungib(ctx, role: discord.Role):
-    left_over = []
-    successful = []
-    await ctx.send("Reply with discord usernames (follow the format)")
+    if ctx.author.guild_permissions.manage_roles or ctx.author.id == 480361233049059338 or ctx.author.id == 776716251997274112:
+        left_over = []
+        successful = []
+        await ctx.send("Reply with discord usernames (follow the format)")
 
-    def check(m):
-        return m.author.id == ctx.author.id
+        def check(m):
+            return m.author.id == ctx.author.id
 
-    message = await client.wait_for('message', check=check, timeout=120)
-    if not message.author.bot:
-        await ctx.send("on it :cat:")
-        if message.attachments:
-            attachment = message.attachments[0]
-            url = attachment.url
-            r = requests.get(url, allow_redirects=True)
+        message = await client.wait_for('message', check=check, timeout=120)
+        if not message.author.bot:
+            await ctx.send("on it :cat:")
+            if message.attachments:
+                attachment = message.attachments[0]
+                url = attachment.url
+                r = requests.get(url, allow_redirects=True)
 
-            open('temp.txt', 'wb').write(r.content)
-            username_list = open('temp.txt', encoding='utf-8').read().splitlines()
-            os.remove("temp.txt")
-        else:
-            msg = message.content
-            username_list = msg.split('\n')
-        for username in username_list:
-            username = username.rstrip()
-            try:
-                namez, id = username.split('#')
-                user = discord.utils.get(ctx.guild.members, name=namez, discriminator=id)
-            except:
-                user = None
-
-            if user == None:
-                left_over.append(username)
+                open('temp.txt', 'wb').write(r.content)
+                username_list = open('temp.txt', encoding='utf-8').read().splitlines()
+                os.remove("temp.txt")
             else:
-                await user.remove_roles(role)
-                successful.append(username)
-        wled = "**Successful**"
-        for i in successful:
-            wled = wled + "\n" + i
-        nwled = "**Not Found**"
-        for i in left_over:
-            nwled = nwled + "\n" + i
+                msg = message.content
+                username_list = msg.split('\n')
+            for username in username_list:
+                username = username.rstrip()
+                try:
+                    namez, id = username.split('#')
+                    user = discord.utils.get(ctx.guild.members, name=namez, discriminator=id)
+                except:
+                    user = None
 
-        if len(wled) > 15 and len(wled) < 1900:
-            await message.channel.send(wled)
-        if len(nwled) > 14 and len(nwled) < 1900:
-            await message.channel.send(nwled)
-        await ctx.send(f"Successfully done for {len(successful)} users")
-        await ctx.send(f"Couldn't find {len(left_over)} users")
+                if user == None:
+                    left_over.append(username)
+                else:
+                    await user.remove_roles(role)
+                    successful.append(username)
+            wled = "**Successful**"
+            for i in successful:
+                wled = wled + "\n" + i
+            nwled = "**Not Found**"
+            for i in left_over:
+                nwled = nwled + "\n" + i
 
+            if len(wled) > 15 and len(wled) < 1900:
+                await message.channel.send(wled)
+            if len(nwled) > 14 and len(nwled) < 1900:
+                await message.channel.send(nwled)
+            await ctx.send(f"Successfully done for {len(successful)} users")
+            await ctx.send(f"Couldn't find {len(left_over)} users")
 
 @client.event
 async def on_command_error(ctx, error):
@@ -216,70 +215,70 @@ async def on_raw_reaction_add(payload):
         await message.remove_reaction('🤡', user)
 
 
-@client.command()
-@commands.has_permissions(manage_roles=True)
 async def assign(ctx, role: discord.Role):
-    if ctx.message.reference:
-        message = await ctx.fetch_message(id=ctx.message.reference.message_id)
-    else:
-        message_id = 991908762992513064
-        message = await ctx.fetch_message(id=message_id)
-    await ctx.send("on it :cat:")
-    left_over = []
-    successful = []
-    for item in message.content.split(" "):
-        # print(item)
-        temp = ""
-        if item.startswith('<@'):
-            for i in item:
-                if i.isdigit():
-                    temp = temp + i
-            user = ctx.guild.get_member(int(temp))
-            if user == None:
-                left_over.append(str(user))
-                continue
-            else:
-                await user.add_roles(role)
-                successful.append(str(user))
-    await ctx.send(f"Successfully done for {len(successful)} users")
-    await ctx.send(f"Couldn't find {len(left_over)} users")
+    if ctx.author.guild_permissions.manage_roles or ctx.author.id == 480361233049059338 or ctx.author.id == 776716251997274112:
+        if ctx.message.reference:
+            message = await ctx.fetch_message(id=ctx.message.reference.message_id)
+        else:
+            message_id = 991908762992513064
+            message = await ctx.fetch_message(id=message_id)
+        await ctx.send("on it :cat:")
+        left_over = []
+        successful = []
+        for item in message.content.split(" "):
+            # print(item)
+            temp = ""
+            if item.startswith('<@'):
+                for i in item:
+                    if i.isdigit():
+                        temp = temp + i
+                user = ctx.guild.get_member(int(temp))
+                if user == None:
+                    left_over.append(str(user))
+                    continue
+                else:
+                    await user.add_roles(role)
+                    successful.append(str(user))
+        await ctx.send(f"Successfully done for {len(successful)} users")
+        await ctx.send(f"Couldn't find {len(left_over)} users")
 
 
 @client.command()
 async def list(ctx):
-    if ctx.message.reference:
-        message = await ctx.fetch_message(id=ctx.message.reference.message_id)
-    else:
-        await ctx.send("Please reply to the message")
-        message_id = 991908762992513064
-        message = await ctx.fetch_message(id=message_id)
-    await ctx.send("on it :cat:")
-    left_over = []
-    successful = []
-    author_list = []
-    for item in message.content.split(" "):
-        temp = ""
-        if item.startswith('<@'):
-            for i in item:
-                if i.isdigit():
-                    temp = temp + i
-            user = ctx.guild.get_member(int(temp))
-            if user == None:
-                left_over.append(str(user))
-                continue
-            else:
-                author_list.append((user.name + '#' + str(user.discriminator)))
-                successful.append(str(user.id))
-    msg = "**Usernames**\n"
-    for user in author_list:
-        msg = msg + user + "\n"
-    await ctx.author.send(msg)
-    msg = "**UserIDs**\n"
-    for user_id in successful:
-        msg = msg + user_id + "\n"
-    await ctx.author.send(msg)
-    await ctx.send(f"Check DM")
-
+    if ctx.author.guild_permissions.manage_roles or ctx.author.id == 480361233049059338 or ctx.author.id == 776716251997274112:
+        if ctx.message.reference:
+            message = await ctx.fetch_message(id=ctx.message.reference.message_id)
+        else:
+            await ctx.send("Please reply to the message")
+            message_id = 991908762992513064
+            message = await ctx.fetch_message(id=message_id)
+        await ctx.send("on it :cat:")
+        left_over = []
+        successful = []
+        author_list = []
+        for item in message.content.split(" "):
+            temp = ""
+            if item.startswith('<@'):
+                for i in item:
+                    if i.isdigit():
+                        temp = temp + i
+                user = ctx.guild.get_member(int(temp))
+                if user == None:
+                    left_over.append(str(user))
+                    continue
+                else:
+                    author_list.append((user.name + '#' + str(user.discriminator)))
+                    successful.append(str(user.id))
+        msg = "**Usernames**\n"
+        for user in author_list:
+            msg = msg + user + "\n"
+        await ctx.author.send(msg)
+        msg = "**UserIDs**\n"
+        for user_id in successful:
+            msg = msg + user_id + "\n"
+        await ctx.author.send(msg)
+        await ctx.send(f"Check DM")
+        
 @client.event
 async def on_message(message):
     if message.guild.id == 995429222497652796:
