@@ -423,7 +423,7 @@ async def on_member_join(member):
                 "Yakub A.B", "Greedisgood", "David Eth Lord",
                 "haifa wehb", "Muhammad Bin Hakim", "Subarash", "amoudi", "Blessed EDDIE", "Rachel19", "Cheeze",
                 "King Nasr", "King Khalid",
-                "Malek Salman"]
+                "Malek Salman","billionare bird","billionare birds","billionarebirds"]
         if any(word.lower() in member.name.lower() for word in mods):
             await member.ban(reason="Impersonating mods")
 
