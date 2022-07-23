@@ -298,7 +298,7 @@ async def on_message(message):
                     return
             if not prince in user.roles and not malek in user.roles:
                 links = [".com", ".net", ".org", ".co", ".us", ".ml", ".tk", ".ga", ".cf", ".gq", "https",
-                         "PHASE 2 MINTING LIVE NOW", "http", "👉 http", "mint.io", "scam","𝘄𝘄𝘄.𝗯𝗶𝗹𝗹𝗶𝗼𝗻𝗮𝗶𝗿𝗲𝗯𝗶𝗿𝗱𝘀.𝗺𝗹","claim here"]
+                         "PHASE 2 MINTING LIVE NOW", "http", "👉 http", "mint.io", "scam","𝘄𝘄𝘄.𝗯𝗶𝗹𝗹𝗶𝗼𝗻𝗮𝗶𝗿𝗲𝗯𝗶𝗿𝗱𝘀.𝗺𝗹","claim here","FAKE RAFFLE with 0 real winners. 200 checks in a row"]
                 white = ["tenor"]
                 if any(word in message.content.lower() for word in links) and any(
                         word not in message.content.lower() for word in white):
