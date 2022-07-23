@@ -208,11 +208,10 @@ async def on_ready():
 
 @client.event
 async def on_raw_reaction_add(payload):
-    if payload.channel_id == 995767283542671420 or payload.channel_id == 996083857168269392:
-        channel = client.get_channel(payload.channel_id)
-        message = await channel.fetch_message(payload.message_id)
-        user = client.get_user(payload.user_id)
-        await message.remove_reaction('🤡', user)
+    channel = client.get_channel(payload.channel_id)
+    message = await channel.fetch_message(payload.message_id)
+    user = client.get_user(payload.user_id)
+    await message.remove_reaction('🤡', user)
 
 
 async def assign(ctx, role: discord.Role):
