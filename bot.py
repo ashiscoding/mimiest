@@ -448,6 +448,46 @@ async def help(ctx):
     help_e.add_field(name="clear <num>", value="Deletes the specified number of messages", inline=False)
     await ctx.send(embed=help_e)
 
+    
+ 
+@client.command()
+async def get_wallets(ctx):
+    channel = ctx.channel
+    messages = await channel.history(limit=1000).flatten()
+    user_ids = []
+    user_wallets = []
+    user_names = []
+    for message in messages:
+        if message.content.startswith('0x') and message.author.id not in user_ids:
+            user_ids.append(message.author.id)
+            user_names.append(message.author.name+'#'+str(message.author.discriminator))
+            user_wallets.append(message.content)
+    user_ids.reverse()
+    user_wallets.reverse()
+    user_names.reverse()
+    with open("user_ids.txt",'w',encoding='utf-8') as f:
+        for user in user_ids:
+            f.write(str(user)+'\n')
+
+    with open("user_names.txt",'w',encoding='utf-8') as f:
+        for user in user_names:
+            f.write(str(user)+'\n')
+
+    with open("wallets.txt",'w',encoding='utf-8') as f:
+        for wallet in user_wallets:
+            f.write(str(wallet)+'\n')
+
+    file = discord.File("user_ids.txt")
+    await ctx.send(file=file, content="IDs of Users")
+    os.remove('user_ids.txt')
+    file = discord.File("user_names.txt")
+    await ctx.send(file=file, content="Usernames")
+    os.remove('user_names.txt')
+    file = discord.File("wallets.txt")
+    await ctx.send(file=file, content="Wallets")
+    os.remove('wallets.txt')
+
+    
 @client.command()
 async def check(ctx):
     await ctx.send("Working :cat:")
