@@ -487,7 +487,17 @@ async def get_wallets(ctx):
     await ctx.send(file=file, content="Wallets")
     os.remove('wallets.txt')
 
+
+
+@client.command()
+async def delete_invites(ctx):
+    await ctx.send("...")
+    for invite in await ctx.guild.invites():
+        if invite.uses == 0:
+            await invite.delete()
+    await ctx.send("Invites with 0 uses deleted")
     
+
 @client.command()
 async def check(ctx):
     await ctx.send("Working :cat:")
