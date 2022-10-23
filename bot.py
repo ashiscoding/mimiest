@@ -278,68 +278,68 @@ async def list(ctx):
         await ctx.author.send(msg)
         await ctx.send(f"Check DM")
         
-@client.event
-async def on_message(message):
-    if message.guild.id == 995429222497652796:
-        princes = 995637756673933332
-        maleks = 995636894895460403
-        prince = message.guild.get_role(princes)
-        malek = message.guild.get_role(maleks)
-        user = message.author
-        if user == None:
-            print("no")
-        else:
-            if message.attachments:
-                text = ''.join(str(e) for e in message.attachments)
-                text = text[-3:]
-                if text == "txt":
-                    await message.delete()
-                    return
-            if not prince in user.roles and not malek in user.roles:
-                links = [".com", ".net", ".org", ".co", ".us", ".ml", ".tk", ".ga", ".cf", ".gq", "https",
-                         "PHASE 2 MINTING LIVE NOW", "http", "👉 http", "mint.io", "scam","𝘄𝘄𝘄.𝗯𝗶𝗹𝗹𝗶𝗼𝗻𝗮𝗶𝗿𝗲𝗯𝗶𝗿𝗱𝘀.𝗺𝗹","claim here","FAKE RAFFLE with 0 real winners. 200 checks in a row"]
-                white = ["tenor"]
-                if any(word in message.content.lower() for word in links) and any(
-                        word not in message.content.lower() for word in white):
-                    await message.delete()
-    if message.guild.id == 995429222497652796 and not message.author.bot:
-        if message.channel.id == 996666624058867774:
-            left_over = []
-            successful = []
-            username_list = message.content.split("\n")
-            role = message.guild.get_role(995639674104189010)
-            for username in username_list:
-                username = username.rstrip()
-                if username.startswith('<@'):
-                    user_id = ""
-                    for c in username:
-                        if c.isdigit():
-                            user_id = user_id + c
-                    user = message.guild.get_member(int(user_id))
-                else:
-                    try:
-                        namez, id = username.split('#')
-                    except:
-                        continue
-                    user = discord.utils.get(message.guild.members, name=namez, discriminator=id)
+# @client.event
+# async def on_message(message):
+#     if message.guild.id == 995429222497652796:
+#         princes = 995637756673933332
+#         maleks = 995636894895460403
+#         prince = message.guild.get_role(princes)
+#         malek = message.guild.get_role(maleks)
+#         user = message.author
+#         if user == None:
+#             print("no")
+#         else:
+#             if message.attachments:
+#                 text = ''.join(str(e) for e in message.attachments)
+#                 text = text[-3:]
+#                 if text == "txt":
+#                     await message.delete()
+#                     return
+#             if not prince in user.roles and not malek in user.roles:
+#                 links = [".com", ".net", ".org", ".co", ".us", ".ml", ".tk", ".ga", ".cf", ".gq", "https",
+#                          "PHASE 2 MINTING LIVE NOW", "http", "👉 http", "mint.io", "scam","𝘄𝘄𝘄.𝗯𝗶𝗹𝗹𝗶𝗼𝗻𝗮𝗶𝗿𝗲𝗯𝗶𝗿𝗱𝘀.𝗺𝗹","claim here","FAKE RAFFLE with 0 real winners. 200 checks in a row"]
+#                 white = ["tenor"]
+#                 if any(word in message.content.lower() for word in links) and any(
+#                         word not in message.content.lower() for word in white):
+#                     await message.delete()
+#     if message.guild.id == 995429222497652796 and not message.author.bot:
+#         if message.channel.id == 996666624058867774:
+#             left_over = []
+#             successful = []
+#             username_list = message.content.split("\n")
+#             role = message.guild.get_role(995639674104189010)
+#             for username in username_list:
+#                 username = username.rstrip()
+#                 if username.startswith('<@'):
+#                     user_id = ""
+#                     for c in username:
+#                         if c.isdigit():
+#                             user_id = user_id + c
+#                     user = message.guild.get_member(int(user_id))
+#                 else:
+#                     try:
+#                         namez, id = username.split('#')
+#                     except:
+#                         continue
+#                     user = discord.utils.get(message.guild.members, name=namez, discriminator=id)
 
-                if user == None:
-                    left_over.append(username)
-                else:
-                    await user.add_roles(role)
-                    successful.append(user.name + '#' + str(user.discriminator))
-            wled = "**Successful**"
-            for i in successful:
-                wled = wled + "\n" + i
-            nwled = "**Not Found**"
-            for i in left_over:
-                nwled = nwled + "\n" + i
-            if len(wled) > 15:
-                await message.channel.send(wled)
-            if len(nwled) > 14:
-                await message.channel.send(nwled)
-            await message.channel.send(f"Successfully done for {len(successful)} users")
-            await message.channel.send(f"Couldn't find {len(left_over)} users")
+#                 if user == None:
+#                     left_over.append(username)
+#                 else:
+#                     await user.add_roles(role)
+#                     successful.append(user.name + '#' + str(user.discriminator))
+#             wled = "**Successful**"
+#             for i in successful:
+#                 wled = wled + "\n" + i
+#             nwled = "**Not Found**"
+#             for i in left_over:
+#                 nwled = nwled + "\n" + i
+#             if len(wled) > 15:
+#                 await message.channel.send(wled)
+#             if len(nwled) > 14:
+#                 await message.channel.send(nwled)
+#             await message.channel.send(f"Successfully done for {len(successful)} users")
+#             await message.channel.send(f"Couldn't find {len(left_over)} users")
 
 #     if message.guild.id == 995429222497652796 and not message.author.bot:
 #         if message.channel.id == 999275777688346735:
@@ -488,18 +488,9 @@ async def get_wallets(ctx):
     os.remove('wallets.txt')
 
 
-@client.command()
-async def delete_invites(ctx):
-    await ctx.send("...")
-    for invite in await ctx.guild.invites():
-        if invite.uses == 0:
-            await invite.delete()
-    await ctx.send("Invites with 0 uses deleted")
-    
-    
-async def check_roles(ctx,user_id, invite):
+async def check_roles(guild ,user_id, invite):
     check_dict = {}
-    user = ctx.guild.get_member(int(user_id))
+    user = guild.get_member(int(user_id))
     if user is None:
         return
     check_dict[5] = 1033581489796939836
@@ -509,76 +500,87 @@ async def check_roles(ctx,user_id, invite):
     check_dict[100] = 1033581189929369670
     check_dict[200] = 1033581096765493349
     if invite == 5:
-        pass
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[200]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[100]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[50]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[30]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[15]))
+        await user.add_roles(discord.utils.get(guild.roles, id=check_dict[5]))
     elif invite == 15:
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[5]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[200]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[100]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[50]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[30]))
+        await user.add_roles(discord.utils.get(guild.roles, id=check_dict[15]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[5]))
     elif invite == 30:
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[15]))
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[5]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[200]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[100]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[50]))
+        await user.add_roles(discord.utils.get(guild.roles, id=check_dict[30]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[15]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[5]))
     elif invite == 50:
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[30]))
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[15]))
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[5]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[200]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[100]))
+        await user.add_roles(discord.utils.get(guild.roles, id=check_dict[50]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[30]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[15]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[5]))
     elif invite == 100:
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[50]))
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[30]))
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[15]))
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[5]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[200]))
+        await user.add_roles(discord.utils.get(guild.roles, id=check_dict[100]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[50]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[30]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[15]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[5]))
     elif invite == 200:
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[100]))
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[50]))
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[30]))
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[15]))
-        await user.remove_roles(discord.utils.get(ctx.guild.roles, id=check_dict[5]))
+        await user.add_roles(discord.utils.get(guild.roles, id=check_dict[200]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[100]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[50]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[30]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[15]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[5]))
 
+#
+async def give_role(name, disc, invites):
+    totalInvites = invites
+    guild = client.get_guild(989976603243188224)
+    user = discord.utils.get(guild.members, name=name, discriminator=disc)
+    if totalInvites >= 200:
+        five_invites_role = discord.utils.get(guild.roles, id=1033581096765493349)
+        await user.add_roles(five_invites_role)
+        await check_roles(guild, user.id, 200)
+    elif totalInvites >= 100:
+        five_invites_role = discord.utils.get(guild.roles, id=1033581189929369670)
+        await user.add_roles(five_invites_role)
+        await check_roles(guild, user.id, 100)
+    elif totalInvites >= 50:
+        five_invites_role = discord.utils.get(guild.roles, id=1033581274176163841)
+        await user.add_roles(five_invites_role)
+        await check_roles(guild, user.id, 50)
+    elif totalInvites >= 30:
+        five_invites_role = discord.utils.get(guild.roles, id=1033581350420226089)
+        await user.add_roles(five_invites_role)
+        await check_roles(guild, user.id, 30)
+    elif totalInvites >= 15:
+        five_invites_role = discord.utils.get(guild.roles, id=1033581373925109912)
+        await user.add_roles(five_invites_role)
+        await check_roles(guild, user.id, 15)
+    elif totalInvites >= 5:
+        five_invites_role = discord.utils.get(guild.roles, id=1033581489796939836)
+        await user.add_roles(five_invites_role)
+        await check_roles(guild, user.id, 5)
 
-async def invitez(ctx):
-    while True:
-        invites_dict = {}
-        for i in await ctx.guild.invites():
-            user = ctx.guild.get_member(int(i.inviter.id))
-            if user is not None:
-                if i.inviter.id in invites_dict.keys():
-                    invites_dict[i.inviter.id] = invites_dict[i.inviter.id] + i.uses
-                else:
-                    invites_dict[i.inviter.id] = i.uses
-            else:
-                continue
-
-        for i in invites_dict.keys():
-            user = ctx.guild.get_member(int(i))
-            if user is None:
-                continue
-            if invites_dict[i] >= 200:
-                five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581096765493349)
-                await user.add_roles(five_invites_role)
-                await check_roles(ctx, i, 200)
-            elif invites_dict[i] >= 100:
-                five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581189929369670)
-                await user.add_roles(five_invites_role)
-                await check_roles(ctx, i, 100)
-            elif invites_dict[i] >= 50:
-                five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581274176163841)
-                await user.add_roles(five_invites_role)
-                await check_roles(ctx, i, 50)
-            elif invites_dict[i] >= 30:
-                five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581350420226089)
-                await user.add_roles(five_invites_role)
-                await check_roles(ctx, i, 30)
-            elif invites_dict[i] >= 15:
-                five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581373925109912)
-                await user.add_roles(five_invites_role)
-                await check_roles(ctx, i, 15)
-            elif invites_dict[i] >= 5:
-                five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581489796939836)
-                await user.add_roles(five_invites_role)
-        await asyncio.sleep(120)
-
-
-@client.command()
-async def start(ctx):
-    await ctx.send("starting..")
-    client.loop.create_task(invitez(ctx))
+@client.event
+async def on_message(message):
+    if message.guild.id == 989976603243188224 and message.channel.id == 990572600411443251:
+        if message.author.id == 720351927581278219:
+            name, disc = message.embeds[0].title.strip('*').split('#')
+            description = message.embeds[0].description
+            # invites = re.findall(r'\*\*.*?\*\*', description)[0].strip('*')
+            invites = 6
+            await give_role(name, disc, int(invites))
     
 @client.command()
 async def check(ctx):
