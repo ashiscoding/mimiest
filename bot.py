@@ -536,7 +536,7 @@ async def invitez(ctx):
     while True:
         invites_dict = {}
         for i in await ctx.guild.invites():
-            user = ctx.guild.get_member(int(i))
+            user = ctx.guild.get_member(int(i.inviter.id))
             if user is not None:
                 if i.inviter.id in invites_dict.keys():
                     invites_dict[i.inviter.id] = invites_dict[i.inviter.id] + i.uses
