@@ -499,9 +499,8 @@ async def delete_invites(ctx):
     
 async def check_roles(ctx,user_id, invite):
     check_dict = {}
-    try:
-        user = ctx.guild.get_member(int(user_id))
-    except:
+    user = ctx.guild.get_member(int(user_id))
+    if user is None:
         return
     check_dict[5] = 1033581489796939836
     check_dict[15] = 1033581373925109912
@@ -535,18 +534,20 @@ async def check_roles(ctx,user_id, invite):
 
 async def invitez(ctx):
     while True:
-        inviter = []
         invites_dict = {}
         for i in await ctx.guild.invites():
-            inviter.append(i.inviter.id)
-            if i.inviter.id in invites_dict.keys():
-                invites_dict[i.inviter.id] = invites_dict[i.inviter.id] + i.uses
+            user = ctx.guild.get_member(int(i))
+            if user is not None:
+                if i.inviter.id in invites_dict.keys():
+                    invites_dict[i.inviter.id] = invites_dict[i.inviter.id] + i.uses
+                else:
+                    invites_dict[i.inviter.id] = i.uses
             else:
-                invites_dict[i.inviter.id] = i.uses
+                continue
+
         for i in invites_dict.keys():
-            try:
-                user = ctx.guild.get_member(int(i))
-            except:
+            user = ctx.guild.get_member(int(i))
+            if user is None:
                 continue
             if invites_dict[i] >= 200:
                 five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581096765493349)
@@ -578,7 +579,6 @@ async def invitez(ctx):
 async def start(ctx):
     await ctx.send("starting..")
     client.loop.create_task(invitez(ctx))
-
     
 @client.command()
 async def check(ctx):
