@@ -499,7 +499,10 @@ async def delete_invites(ctx):
     
 async def check_roles(ctx,user_id, invite):
     check_dict = {}
-    user = ctx.guild.get_member(int(user_id))
+    try:
+        user = ctx.guild.get_member(int(user_id))
+    except:
+        return
     check_dict[5] = 1033581489796939836
     check_dict[15] = 1033581373925109912
     check_dict[30] = 1033581350420226089
@@ -541,33 +544,31 @@ async def invitez(ctx):
             else:
                 invites_dict[i.inviter.id] = i.uses
         for i in invites_dict.keys():
-            if invites_dict[i] >= 200:
+            try:
                 user = ctx.guild.get_member(int(i))
+            except:
+                continue
+            if invites_dict[i] >= 200:
                 five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581096765493349)
                 await user.add_roles(five_invites_role)
                 await check_roles(ctx, i, 200)
             elif invites_dict[i] >= 100:
-                user = ctx.guild.get_member(int(i))
                 five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581189929369670)
                 await user.add_roles(five_invites_role)
                 await check_roles(ctx, i, 100)
             elif invites_dict[i] >= 50:
-                user = ctx.guild.get_member(int(i))
                 five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581274176163841)
                 await user.add_roles(five_invites_role)
                 await check_roles(ctx, i, 50)
             elif invites_dict[i] >= 30:
-                user = ctx.guild.get_member(int(i))
                 five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581350420226089)
                 await user.add_roles(five_invites_role)
                 await check_roles(ctx, i, 30)
             elif invites_dict[i] >= 15:
-                user = ctx.guild.get_member(int(i))
                 five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581373925109912)
                 await user.add_roles(five_invites_role)
                 await check_roles(ctx, i, 15)
             elif invites_dict[i] >= 5:
-                user = ctx.guild.get_member(int(i))
                 five_invites_role = discord.utils.get(ctx.guild.roles, id=1033581489796939836)
                 await user.add_roles(five_invites_role)
         await asyncio.sleep(120)
@@ -575,6 +576,7 @@ async def invitez(ctx):
 
 @client.command()
 async def start(ctx):
+    await ctx.send("starting..")
     client.loop.create_task(invitez(ctx))
 
     
