@@ -4,6 +4,7 @@ import datetime
 from discord.ext import commands
 import sys
 import requests
+import re
 
 intents = discord.Intents.default()
 intents.members = True
