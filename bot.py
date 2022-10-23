@@ -499,7 +499,9 @@ async def check_roles(guild ,user_id, invite):
     check_dict[50] = 1033581274176163841
     check_dict[100] = 1033581189929369670
     check_dict[200] = 1033581096765493349
+    check_dict[400] = 1033612000913276959
     if invite == 5:
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[400]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[200]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[100]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[50]))
@@ -507,6 +509,7 @@ async def check_roles(guild ,user_id, invite):
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[15]))
         await user.add_roles(discord.utils.get(guild.roles, id=check_dict[5]))
     elif invite == 15:
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[400]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[200]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[100]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[50]))
@@ -514,6 +517,7 @@ async def check_roles(guild ,user_id, invite):
         await user.add_roles(discord.utils.get(guild.roles, id=check_dict[15]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[5]))
     elif invite == 30:
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[400]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[200]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[100]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[50]))
@@ -521,6 +525,7 @@ async def check_roles(guild ,user_id, invite):
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[15]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[5]))
     elif invite == 50:
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[400]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[200]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[100]))
         await user.add_roles(discord.utils.get(guild.roles, id=check_dict[50]))
@@ -528,6 +533,7 @@ async def check_roles(guild ,user_id, invite):
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[15]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[5]))
     elif invite == 100:
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[400]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[200]))
         await user.add_roles(discord.utils.get(guild.roles, id=check_dict[100]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[50]))
@@ -535,19 +541,32 @@ async def check_roles(guild ,user_id, invite):
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[15]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[5]))
     elif invite == 200:
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[400]))
         await user.add_roles(discord.utils.get(guild.roles, id=check_dict[200]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[100]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[50]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[30]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[15]))
         await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[5]))
+    elif invite == 400:
+        await user.add_roles(discord.utils.get(guild.roles, id=check_dict[400]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[200]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[100]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[50]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[30]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[15]))
+        await user.remove_roles(discord.utils.get(guild.roles, id=check_dict[5]))
 
-#
+
 async def give_role(name, disc, invites):
     totalInvites = invites
     guild = client.get_guild(989976603243188224)
     user = discord.utils.get(guild.members, name=name, discriminator=disc)
-    if totalInvites >= 200:
+    if totalInvites >= 400:
+        five_invites_role = discord.utils.get(guild.roles, id=1033612000913276959)
+        await user.add_roles(five_invites_role)
+        await check_roles(guild, user.id, 400)
+    elif totalInvites >= 200:
         five_invites_role = discord.utils.get(guild.roles, id=1033581096765493349)
         await user.add_roles(five_invites_role)
         await check_roles(guild, user.id, 200)
@@ -578,9 +597,9 @@ async def on_message(message):
         if message.author.id == 720351927581278219:
             name, disc = message.embeds[0].title.strip('*').split('#')
             description = message.embeds[0].description
-            # invites = re.findall(r'\*\*.*?\*\*', description)[0].strip('*')
-            invites = 6
+            invites = re.findall(r'\*\*.*?\*\*', description)[0].strip('*')
             await give_role(name, disc, int(invites))
+
     
 @client.command()
 async def check(ctx):
