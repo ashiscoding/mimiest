@@ -600,6 +600,7 @@ async def on_message(message):
             description = message.embeds[0].description
             invites = re.findall(r'\*\*.*?\*\*', description)[0].strip('*')
             await give_role(name, disc, int(invites))
+     await client.process_commands(message)
 
     
 @client.command()
