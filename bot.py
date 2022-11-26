@@ -602,7 +602,11 @@ async def on_message(message):
             description = message.embeds[0].description
             invites = re.findall(r'\*\*.*?\*\*', description)[0].strip('*')
             await give_role(name, disc, int(invites))
-
+            
+    if message.guild.id == 988374126681030656 and message.channel.id == 988374129226965012:
+        if message.content == "/resend-roles":
+            await message.channel.send("Make sure to select Crew3 bot")
+            
     if message.guild.id == 989976603243188224:
         princes = 990241246222094366
         holders = 995499325473947648
@@ -627,6 +631,7 @@ async def on_message(message):
                 if any(word in message.content.lower() for word in links) and any(
                         word not in message.content.lower() for word in white):
                     await message.delete()
+                    
     await client.process_commands(message)
 
     
